@@ -1,0 +1,18 @@
+.compare-page {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  min-height: 0;
+  gap: 1rem;
+}
+
+.compare-page__cards-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  height: 100%;
+  gap: 1rem;
+}
+
+.compare-page__compare-options {
+  padding: 1rem;
+}

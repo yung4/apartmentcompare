@@ -1,0 +1,52 @@
+.create-page {
+  display: flex;
+  flex-direction: column;
+  
+  flex-grow: 1;
+  min-height: 0;
+}
+
+.MuiCardContent-root.create-page__form {
+  display: grid;
+  grid-template-columns: 3fr 5fr;
+  gap: 1rem;
+  flex-grow: 1;
+  min-height: 0;
+  padding: 0 1rem;
+} 
+
+.MuiCard-root.create-page-form__card {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  min-height: 0;
+  padding: 1rem;
+  gap: 1rem;
+  overflow: auto;
+}
+
+.MuiCardHeader-root.create-page-form__title {
+  padding: 0;
+}
+
+.create-page-form__additional-field {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+
+.multiline-wrapper {
+  flex-grow: 1;
+  min-height: 0;
+}
+
+.create-page__actions {
+  justify-content: end;
+}
+
+.discount-field__time-row {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  align-items: center;
+}
