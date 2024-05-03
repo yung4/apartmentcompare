@@ -1,3 +1,3 @@
 export default {
-  base: "/apartment-compare/"
+  base: "/apartmentcompare/"
 }
