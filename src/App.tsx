@@ -105,7 +105,7 @@ function App() {
                   }}
                   InputProps={{ inputProps: { min: 1 } }}
                 />
-                <Button variant="contained" onClick={handleClearApartments} disabled={selectedApts.length === 0}>
+                <Button variant="outlined" onClick={handleClearApartments} disabled={selectedApts.length === 0}>
                   Clear All
                 </Button>
               </Card>

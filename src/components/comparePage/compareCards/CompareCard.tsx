@@ -25,7 +25,6 @@ const CompareCard = ({ apartmentData, baseApartment, closeCard, leaseLength, set
     }, new Map()
   );
 
-  //TODO: figure out how to save this so that if base is edited its correct
   const calculateTotalCost = () => {
     let cost = Number(apartmentData.cost);
 
@@ -67,7 +66,6 @@ const CompareCard = ({ apartmentData, baseApartment, closeCard, leaseLength, set
         <div className="compare-card__additonal-costs">
           {apartmentData.additionalCosts.map((item, index) => {
             return (
-
               <CompareCardRow
                 key={index}
                 name={item.name}
@@ -82,7 +80,6 @@ const CompareCard = ({ apartmentData, baseApartment, closeCard, leaseLength, set
                   }}
                 />
               </CompareCardRow>
-
             )
           })}
         </div>

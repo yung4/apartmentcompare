@@ -14,5 +14,8 @@
 }
 
 .compare-page__compare-options {
+  display: flex;
+  flex-direction: row;
   padding: 1rem;
+  gap: 1rem;
 }
