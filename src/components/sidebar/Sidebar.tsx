@@ -17,7 +17,6 @@ const Sidebar = ({ openEditPage, addApartment }: { openEditPage: any, addApartme
   React.useEffect(() => {
     const checkLocalStorage = () => {
       const apts = JSON.parse(localStorage.getItem("savedApartments") as string);
-      console.log(apts)
 
       if (apts) {
         setSavedApts(apts);

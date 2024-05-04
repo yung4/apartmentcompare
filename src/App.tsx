@@ -3,6 +3,7 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 import Card from "@mui/material/Card";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import Backdrop from "@mui/material/Backdrop";
 
 import Sidebar from './components/sidebar/Sidebar'
 import ComparePage from './components/comparePage/ComparePage'
@@ -27,6 +28,7 @@ const lightTheme = createTheme({
 function App() {
 
   const [isCreating, setIsCreating] = React.useState(false);
+  const [isSelecting, setIsSelecting] = React.useState(false);
   const [selectedApts, setSelectedApts] = React.useState<ApartmentData[]>([])
   const [leaseLength, setLeaseLength] = React.useState(12);
   const [aptToEdit, setAptToEdit] = React.useState<ApartmentData | undefined>(undefined);
@@ -52,9 +54,13 @@ function App() {
   }
 
   const handleOpenEditPage = (apt: ApartmentData | undefined) => {
+    setIsCreating(false);
     setIsCreating(true);
     setAptToEdit(apt);
-    console.log(apt);
+  }
+
+  const handleBackdrop = (value: boolean) => {
+    setIsSelecting(value);
   }
 
   const setTotalCost = (index: number, newCost: number) => {
@@ -73,7 +79,10 @@ function App() {
       <div className="app">
         <Sidebar openEditPage={handleOpenEditPage} addApartment={handleAddApartment} />
         <div className="homePage">
-          {isCreating && <CreatePage setIsCreating={setIsCreating} selectedApartment={aptToEdit} />}
+          <Backdrop open={isSelecting} onClick={() => handleBackdrop(false)}>
+            Select an apartment
+          </Backdrop>
+          {isCreating && <CreatePage key={JSON.stringify(aptToEdit)} setIsCreating={setIsCreating} selectedApartment={aptToEdit} />}
           {!isCreating &&
             <div className="compare-page">
               <Card className="compare-page__compare-options">
@@ -93,11 +102,11 @@ function App() {
               </Card>
               <ComparePage
                 selectedApartments={selectedApts}
-                addApartment={handleAddApartment}
                 removeApartment={handleRemoveApartment}
                 swapApartment={handleSwapApartment}
                 setTotalCost={setTotalCost}
                 leaseLength={leaseLength}
+                setSelecting={() => handleBackdrop(true)}
               />
             </div>
           }

@@ -24,7 +24,6 @@ const DiscountField = ({ baseRent, setDiscountPrice }: { baseRent: number, setDi
   }
 
   const handleTimedDiscountType = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e)
     setTimeDiscountType(e.target.value);
   }
 

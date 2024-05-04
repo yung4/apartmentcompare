@@ -6,8 +6,8 @@ import EmptyCard from "./compareCards/EmptyCard";
 import "./ComparePage.css"
 import { ApartmentData } from "../../interfaces/ApartmentInterfaces";
 
-const ComparePage = ({ selectedApartments, addApartment, removeApartment, swapApartment, setTotalCost, leaseLength }:
-  { selectedApartments: ApartmentData[], addApartment: any, removeApartment: any, swapApartment: any, setTotalCost: any, leaseLength: number }
+const ComparePage = ({ selectedApartments, removeApartment, swapApartment, setTotalCost, leaseLength, setSelecting }:
+  { selectedApartments: ApartmentData[], removeApartment: any, swapApartment: any, setTotalCost: any, leaseLength: number, setSelecting: any }
 ) => {
 
   const handleUpdateTotalCost = (index: number, newCost: number) => {
@@ -31,7 +31,7 @@ const ComparePage = ({ selectedApartments, addApartment, removeApartment, swapAp
         )
       })}
       {/* <CompareCard /> */}
-      {selectedApartments.length < 4 && <EmptyCard />}
+      {selectedApartments.length < 4 && <EmptyCard setSelecting={setSelecting} />}
 
     </div>
   )

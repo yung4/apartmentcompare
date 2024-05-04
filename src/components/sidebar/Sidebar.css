@@ -8,6 +8,7 @@
     max-width: 20%;
     background-color: rgb(27, 27, 27);
     padding: 1rem;
+    z-index: 2;
 }
 
 .sidebar__saved-apartments-wrapper {
@@ -22,18 +23,22 @@
 .sidebar__saved-apartments {
     display: flex;
     flex-direction: column;
-    /* flex-grow: 1;
-    min-height: 0; */
     gap: 1rem;
     overflow: auto;
 }
 
-.MuiButton-outlined.sidebar-saved-apartments__card {
+.sidebar-saved-apartments__card {
+    display: flex;
+    flex-direction: row;
+    padding: 0 0.5rem;
+
     min-height: 2.5rem;
     max-height: 2.5rem;
     justify-content: space-between;
+    align-items: center;
     color: black;
     border: 1px solid black;
+    border-radius: 4px;
 }
 
 .line-grow {

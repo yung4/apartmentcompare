@@ -33,7 +33,7 @@ const CreatePage = ({ setIsCreating, selectedApartment }: { setIsCreating: Funct
   const [additionalCosts, setAdditionalCosts] = React.useState<AdditionalCost[]>(aptData.additionalCosts);
   const [discountPrice, setDiscountPrice] = React.useState(aptData.discountPrice);
 
-  const isCreating = aptData !== emptyApartmentCore;
+  const isCreating = JSON.stringify(aptData) === JSON.stringify(emptyApartmentCore);
 
   const handleAddNewCost = () => {
     setAdditionalCosts([...additionalCosts, { name: "", cost: 0 }])
@@ -100,10 +100,21 @@ const CreatePage = ({ setIsCreating, selectedApartment }: { setIsCreating: Funct
     setIsCreating(false);
   }
 
+  const handleDelete = () => {
+    const savedApts = JSON.parse(localStorage.getItem("savedApartments") as string) || [];
+
+    let newApartments = savedApts.filter((apt: ApartmentData) => apt.id != aptData.id);
+
+    localStorage.setItem("savedApartments", JSON.stringify(newApartments));
+    window.dispatchEvent(new Event("storage"));
+
+    setIsCreating(false);
+  }
+
   return (
     <Card className="create-page">
       <CardHeader
-        title="Add New Apartment"
+        title={`${isCreating ? "Add New" : "Edit/View"} Apartment`}
         action={<Button variant="outlined" onClick={() => setIsCreating(false)}><CloseIcon /></Button>}
       />
       <CardContent className="create-page__form">
@@ -157,6 +168,7 @@ const CreatePage = ({ setIsCreating, selectedApartment }: { setIsCreating: Funct
                   name={item?.name}
                   cost={item?.cost}
                   updateItem={handleUpdateCost}
+                  addItem={handleAddNewCost}
                 />
                 <Button onClick={() => { handleRemoveCost(index) }}>Remove</Button>
               </div>
@@ -169,6 +181,7 @@ const CreatePage = ({ setIsCreating, selectedApartment }: { setIsCreating: Funct
         </Card>
       </CardContent>
       <CardActions className="create-page__actions">
+        {!isCreating && <Button variant="contained" color="error" onClick={handleDelete}>Delete</Button>}
         <Button variant="outlined" onClick={() => setIsCreating(false)}>Cancel</Button>
         <Button variant="contained" onClick={handleSave}>Save</Button>
       </CardActions>

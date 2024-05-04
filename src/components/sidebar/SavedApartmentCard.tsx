@@ -9,12 +9,10 @@ const SavedApartmentCard = ({ name, cost, addApartment, editApartment }: { name:
   const [isHovered, setIsHovered] = React.useState(false);
 
   return (
-    <Button
+    <div
       onMouseOver={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       className="sidebar-saved-apartments__card"
-      variant="outlined"
-      disableRipple
     >
       {isHovered && (
         <>
@@ -51,7 +49,7 @@ const SavedApartmentCard = ({ name, cost, addApartment, editApartment }: { name:
         </>)}
 
 
-    </Button>
+    </div>
   )
 }
 

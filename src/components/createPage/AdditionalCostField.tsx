@@ -5,9 +5,15 @@ import InputAdornment from '@mui/material/InputAdornment';
 import "./CreatePage.css"
 
 const AdditionalCostField = (
-  { name, cost, index, updateItem }:
-    { name: String, cost: Number, index: number, updateItem: any }
+  { name, cost, index, updateItem, addItem }:
+    { name: String, cost: Number, index: number, updateItem: any, addItem: any }
 ) => {
+
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === "Enter") {
+      addItem();
+    }
+  }
 
   return (
     <>
@@ -29,6 +35,7 @@ const AdditionalCostField = (
         type="number"
         InputProps={{ startAdornment: <InputAdornment position="start">$</InputAdornment> }}
         onChange={(e) => { updateItem(e, index) }}
+        onKeyDown={handleKeyPress}
       />
     </>
   )
