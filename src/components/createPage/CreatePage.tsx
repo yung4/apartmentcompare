@@ -33,7 +33,7 @@ const CreatePage = ({ setIsCreating, selectedApartment }: { setIsCreating: Funct
   const [additionalCosts, setAdditionalCosts] = React.useState<AdditionalCost[]>(aptData.additionalCosts);
   const [discountPrice, setDiscountPrice] = React.useState(aptData.discountPrice);
 
-  const isCreating = JSON.stringify(aptData) === JSON.stringify(emptyApartmentCore);
+  const isCreating = !aptData.id;
 
   const handleAddNewCost = () => {
     setAdditionalCosts([...additionalCosts, { name: "", cost: 0 }])
@@ -73,10 +73,13 @@ const CreatePage = ({ setIsCreating, selectedApartment }: { setIsCreating: Funct
     const newAptObj: ApartmentData = {
       ...aptData,
       id: isCreating ? uuid() : aptData.id,
-      additionalCosts: additionalCosts,
       totalCost: calculateTotalCost(),
       discountPrice: discountPrice
     };
+
+    if (JSON.stringify(additionalCosts) !== JSON.stringify([{ name: "", cost: 0 }])) {
+      newAptObj.additionalCosts = additionalCosts;
+    }
 
     const savedApts = JSON.parse(localStorage.getItem("savedApartments") as string) || [];
 
@@ -183,7 +186,7 @@ const CreatePage = ({ setIsCreating, selectedApartment }: { setIsCreating: Funct
       <CardActions className="create-page__actions">
         {!isCreating && <Button variant="contained" color="error" onClick={handleDelete}>Delete</Button>}
         <Button variant="outlined" onClick={() => setIsCreating(false)}>Cancel</Button>
-        <Button variant="contained" onClick={handleSave}>Save</Button>
+        <Button variant="contained" onClick={handleSave} disabled={!aptData.name}>Save</Button>
       </CardActions>
     </Card>
   )

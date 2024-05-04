@@ -58,7 +58,7 @@ const Sidebar = ({ openEditPage, addApartment }: { openEditPage: any, addApartme
           onClick={() => openEditPage(undefined)}
           startIcon={<AddIcon />}
         >
-          Add New Apartment
+          Create New Apartment
         </Button>
 
       </Card>

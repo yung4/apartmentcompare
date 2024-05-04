@@ -23,3 +23,7 @@
   flex-grow: 1;
   min-height: 0;
 }
+
+.MuiBackdrop-root {
+  z-index: 1;
+}
