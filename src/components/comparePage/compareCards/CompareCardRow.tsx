@@ -25,13 +25,13 @@ const CompareCardRow = ({ name, cost, baseCost, children }:
     } else if (difference < 0) {
       return (
         <Typography sx={{ color: "green" }}>
-          {difference}
+          -${Math.abs(difference)}
         </Typography >
       )
     } else {
       return (
         <Typography sx={{ color: "red" }}>
-          +{difference}
+          +${difference}
         </Typography >
       )
     }

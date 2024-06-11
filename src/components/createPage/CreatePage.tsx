@@ -63,17 +63,18 @@ const CreatePage = ({ setIsCreating, selectedApartment }: { setIsCreating: Funct
     setAptData({ ...aptData, [name]: value })
   }
 
-  const calculateTotalCost = () => {
+  const calculateMonthlyCost = () => {
     const initialCost = Number(aptData.cost);
 
     return additionalCosts.reduce((accumulator, item) => accumulator + Number(item.cost), initialCost);
   }
 
   const handleSave = () => {
+    console.log(discountPrice)
     const newAptObj: ApartmentData = {
       ...aptData,
       id: isCreating ? uuid() : aptData.id,
-      totalCost: calculateTotalCost(),
+      totalCost: calculateMonthlyCost(),
       discountPrice: discountPrice
     };
 
@@ -135,7 +136,11 @@ const CreatePage = ({ setIsCreating, selectedApartment }: { setIsCreating: Funct
             name="cost"
             value={aptData.cost}
             type="number"
-            InputProps={{ startAdornment: <InputAdornment position="start">$</InputAdornment> }}
+            InputProps={{
+              startAdornment: <InputAdornment position="start">$</InputAdornment>,
+              endAdornment: <InputAdornment position="end">per month</InputAdornment>
+            }}
+
             onChange={setValue}
           />
           <div className="multiline-wrapper">
@@ -151,10 +156,10 @@ const CreatePage = ({ setIsCreating, selectedApartment }: { setIsCreating: Funct
               onChange={setValue}
             />
           </div>
-          <DiscountField baseRent={aptData.cost} setDiscountPrice={setDiscountPrice} />
+          {/* <DiscountField baseRent={aptData.cost} setDiscountPrice={setDiscountPrice} /> */}
 
           <Typography>
-            Total Cost: ${calculateTotalCost()} per month
+            Cost per month: ${calculateMonthlyCost()}
           </Typography>
         </Card>
 
@@ -182,13 +187,13 @@ const CreatePage = ({ setIsCreating, selectedApartment }: { setIsCreating: Funct
             Add New Additional Cost
           </Button>
         </Card>
-      </CardContent>
+      </CardContent >
       <CardActions className="create-page__actions">
         {!isCreating && <Button variant="contained" color="error" onClick={handleDelete}>Delete</Button>}
         <Button variant="outlined" onClick={() => setIsCreating(false)}>Cancel</Button>
         <Button variant="contained" onClick={handleSave} disabled={!aptData.name}>Save</Button>
       </CardActions>
-    </Card>
+    </Card >
   )
 }
 
